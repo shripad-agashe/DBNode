@@ -12,14 +12,18 @@ repositories {
 
 dependencies {
     compile 'org.iq80.leveldb:leveldb:0.7'
+    compile 'io.netty:netty-all:4.1.0.CR3'
+    compile group: 'com.esotericsoftware', name: 'kryo', version: '3.0.3'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
 }
+
+
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Gradle Jar File Example',
                 'Implementation-Version': version,
-                'Main-Class': 'DBClient'
+                'Main-Class': 'DBSocketServer'
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
