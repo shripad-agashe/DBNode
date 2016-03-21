@@ -1,12 +1,13 @@
 package common;
 
-public class Command {
+public class CommandWrapper {
 
     private String commandClass;
 
     static final long serialVersionUID = 1L;
-    public Command(String commandClass, byte[] command) {
+    public CommandWrapper(String commandClass, byte[] command, int length) {
         this.commandClass = commandClass;
+        this.contentLength = length;
         this.command = command;
     }
 
