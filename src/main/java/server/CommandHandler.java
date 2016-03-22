@@ -2,7 +2,6 @@ package server;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
-import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import common.DBEntry;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -16,7 +15,6 @@ public class CommandHandler extends SimpleChannelInboundHandler {
         ByteBuf buf1 = (ByteBuf) msg;
 
         Kryo kryo = new Kryo();
-        kryo.register(DBEntry.class,new JavaSerializer());
         int i = buf1.readableBytes();
 
         byte[] buf = new byte[i];
