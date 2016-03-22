@@ -15,5 +15,6 @@ public class DBServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("ObjectEncoder", new CommandEncoder());
         pipeline.addLast("RequestHandler", new CommandHandler());
         pipeline.addLast("Insert", new PutCommand());
+        pipeline.addLast("Query", new QueryCommand());
     }
 }

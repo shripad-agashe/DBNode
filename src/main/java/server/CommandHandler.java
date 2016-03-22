@@ -23,8 +23,7 @@ public class CommandHandler extends SimpleChannelInboundHandler {
         buf1.readBytes(buf);
         Input input = new Input(buf);
         DBEntry dbEntry;
-        dbEntry = (DBEntry) kryo.readClassAndObject(input);
-        ctx.fireChannelRead(dbEntry);
-        System.out.println(dbEntry.value);
+        Object obj = kryo.readClassAndObject(input);
+        ctx.fireChannelRead(obj);
     }
 }
