@@ -13,6 +13,7 @@ public class QueryCommand extends SimpleChannelInboundHandler<DBQuery>{
         Reader reader = new Reader();
         System.out.println(msg.getKey());
         String value = reader.get(msg.getKey());
+        System.out.println("##################  " + value);
         ctx.write(new DBOperationResponse(value));
         ctx.flush();
 

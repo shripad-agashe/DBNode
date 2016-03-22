@@ -18,6 +18,5 @@ public class CommandEncoder extends MessageToByteEncoder<DBOperationResponse> {
 
         System.out.printf("Going back to client:" + msg.getResponse());
         out.writeBytes(output.getBuffer());
-        ctx.flush();
     }
 }
