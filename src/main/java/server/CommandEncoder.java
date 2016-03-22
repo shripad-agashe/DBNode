@@ -18,11 +18,6 @@ public class CommandEncoder extends MessageToByteEncoder<DBOperationResponse> {
 
         System.out.printf("Going back to client:" + msg.getResponse());
         out.writeBytes(output.getBuffer());
-
-    }
-
-    @Override
-    public void flush(ChannelHandlerContext ctx) throws Exception {
-        super.flush(ctx);
+        ctx.flush();
     }
 }
