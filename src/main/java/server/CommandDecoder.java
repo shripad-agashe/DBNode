@@ -16,31 +16,41 @@ public class CommandDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         System.out.println("In Decoder");
 
-        byte[] bytes = new byte[in.readableBytes()];
+//        byte[] bytes = new byte[in.readableBytes()];
 
-        ByteBuf byteBuf = in.readBytes(in.readableBytes());
+//        ByteBuf byteBuf = in.readBytes(in.readableBytes());
 
 
         Kryo kryo = new Kryo();
         kryo.register(DBEntry.class,new JavaSerializer());
-        Input input = new Input(byteBuf.array());
 //
-//        if (in.readableBytes() < 2)
-//            return;
+        int i = in.readableBytes();
+        if (i < 2)
+            return;
 //
 //        in.markReaderIndex();
+//        System.out.println("@@@@@@@@@@@@: " + in.readerIndex());
+//
 //
 //        int len = in.readUnsignedShort();
+//        System.out.println("@@@@@@@@@@@@: " + in.writerIndex());
 //
-//        if (in.readableBytes() < len) {
+//        System.out.println("############## " + len);
+//        System.out.println("############## " + i);
+//
+//        if (i < len && i < in.writerIndex()) {
 //            in.resetReaderIndex();
 //            return;
 //        }
+
+
 //
-//        byte[] buf = new byte[len];
-//        in.readBytes(buf);
-//        Input input = new Input(byteBuf.getByte(0));
-        DBEntry dbEntry = kryo.readObject(input, DBEntry.class);
+        byte[] buf = new byte[i];
+        in.readBytes(buf);
+        Input input = new Input(buf);
+        DBEntry dbEntry;
+        dbEntry = (DBEntry) kryo.readClassAndObject(input);
+        System.out.println("####### :" +dbEntry.value);
         out.add(dbEntry);
     }
 }
