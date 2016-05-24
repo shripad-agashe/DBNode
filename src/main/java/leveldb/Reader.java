@@ -22,7 +22,10 @@ public class Reader {
         options.createIfMissing(true);
         String value = "";
         try {
-            value = new String(db.get(bytes(key)));
+            byte[] bytes = db.get(bytes(key));
+            if(bytes != null){
+                value = new String(bytes);
+            }
         } finally {
             // Make sure you close the db to shutdown the
             // database and avoid resource leaks.
